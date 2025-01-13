@@ -3,8 +3,10 @@ const path = require("path");
 const app = new Koa();
 const { koaBody } = require("koa-body");
 const errHandler = require("../constant/err.handler");
+const cors = require("@koa/cors");
 // 导入路由
 const router = require("../router");
+app.use(cors());
 app.use(
   koaBody({
     multipart: true, // 启用 multipart 支持
