@@ -1,10 +1,12 @@
 const {
   findAllHospital,
   findHospitalByDictCode,
+  findHospitalBykeyword,
 } = require("../service/home.service");
 const {
   hospitalListError,
   hospitalLevelAndRegionError,
+  hospitalSearchError,
 } = require("../constant/err.type");
 class homeController {
   async hospitallist(ctx, next) {
@@ -38,6 +40,20 @@ class homeController {
       };
     } catch (error) {
       ctx.app.emit("error", hospitalLevelAndRegionError, ctx);
+    }
+  }
+  async hospitalSearch(ctx, next) {
+    const { keyword } = ctx.params;
+    try {
+      const result = await findHospitalBykeyword(keyword); // 调用 findHospitalBykeyword 方法查询医院信息
+      ctx.body = {
+        code: 200,
+        message: "搜索医院信息成功",
+        result,
+      };
+    } catch (error) {
+      console.log(error);
+      ctx.app.emit("error", hospitalSearchError, ctx);
     }
   }
 }

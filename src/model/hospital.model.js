@@ -11,5 +11,6 @@ module.exports = mongoose.model(
     img: { type: String, required: true },
     districtCode: { type: String, required: true },
     district: { type: String, required: true },
+    hoscode: { type: String, required: true },
   })
 );

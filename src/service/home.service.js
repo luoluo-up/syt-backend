@@ -49,6 +49,24 @@ class HomeService {
       };
     }
   }
+  async findHospitalBykeyword(keyword) {
+    try {
+      const result = await HospitalModel.find({
+        $or: [
+          { name: { $regex: keyword } }, // 根据医院名称搜索
+          { address: { $regex: keyword } }, // 根据地址搜索
+          { introduce: { $regex: keyword } }, // 根据介绍搜索
+        ],
+      });
+      return result;
+    } catch (error) {
+      return {
+        success: false,
+        message: "获取医院数据时出错", // 返回错误信息
+        error: error,
+      };
+    }
+  }
 }
 
 module.exports = new HomeService();

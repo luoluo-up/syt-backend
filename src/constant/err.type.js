@@ -24,4 +24,9 @@ module.exports = {
     message: "医院等级或地区获取失败",
     result: "",
   },
+  hospitalSearchError: {
+    code: 10006,
+    message: "医院搜索失败",
+    result: "",
+  },
 };
