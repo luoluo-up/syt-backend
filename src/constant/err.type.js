@@ -19,4 +19,9 @@ module.exports = {
     message: "医院列表获取失败",
     result: "",
   },
+  hospitalLevelAndRegionError: {
+    code: 10005,
+    message: "医院等级或地区获取失败",
+    result: "",
+  },
 };
