@@ -6,18 +6,11 @@ module.exports = (success, error) => {
     };
   }
   const mongoose = require("mongoose");
-  const {
-    MONGO_DB,
-    MONGO_URI,
-    mongodbUrl,
-  } = require("../config/config.default");
+  const { mongodbUrl } = require("../config/config.default");
   // const uri = `${MONGO_URI}/${MONGO_DB}`;
   //   const uri = `${mongodbUrl}`;
   // const { mongodbUrl } = process.env;
-  mongoose.connect(mongodbUrl, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
+  mongoose.connect(mongodbUrl);
   //得到数据库连接句柄
   const db = mongoose.connection;
   db.once("open", () => {

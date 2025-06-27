@@ -29,4 +29,44 @@ module.exports = {
     message: "医院搜索失败",
     result: "",
   },
+  hospitalDetailError: {
+    code: 10007,
+    message: "医院详情获取失败",
+    result: "",
+  },
+  hospitalDepartmentError: {
+    code: 10008,
+    message: "医院科室获取失败",
+    result: "",
+  },
+  smsCodeError: {
+    code: 10009,
+    message: "验证码发送失败",
+    result: "",
+  },
+  userNotExistError: {
+    code: 10010,
+    message: "用户不存在",
+    result: "",
+  },
+  invalidPasswordError: {
+    code: "10005",
+    message: "密码错误",
+    result: "",
+  },
+  invalidSMSCodeError: {
+    code: "10006",
+    message: "验证码错误",
+    result: "",
+  },
+  userLoginError: {
+    code: 10012,
+    message: "用户登录失败",
+    result: "",
+  },
+  invalidSMSCodeError: {
+    code: 10013,
+    message: "验证码错误",
+    result: "",
+  },
 };

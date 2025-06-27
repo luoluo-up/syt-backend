@@ -3,10 +3,12 @@ const router = new Router({ prefix: "/user" });
 // 导入中间件
 const {
   userValidator,
+  smsLoginValidator,
   userAlreadyExist,
   encryptPassword,
+  verifySMSCode,
 } = require("../middleware/user.middleware");
-const { register } = require("../controller/user.controller");
+const { register, smscode, login } = require("../controller/user.controller");
 router.get("/", async (ctx, next) => {
   ctx.body = "用户路由";
 });
@@ -19,8 +21,9 @@ router.post(
   encryptPassword,
   register
 );
-//登录接口
-router.post("/login", async (ctx, next) => {
-  ctx.body = "登录接口";
-});
+
+// 验证码登录接口
+router.post("/login", smsLoginValidator, verifySMSCode, login);
+// 获取验证码
+router.get("/smscode/:phone", smscode);
 module.exports = router;

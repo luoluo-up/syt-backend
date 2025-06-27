@@ -2,11 +2,14 @@ const {
   findAllHospital,
   findHospitalByDictCode,
   findHospitalBykeyword,
+  findHospitalDetail,
+  findHospitalDepartment,
 } = require("../service/home.service");
 const {
   hospitalListError,
   hospitalLevelAndRegionError,
   hospitalSearchError,
+  hospitalDepartmentError,
 } = require("../constant/err.type");
 class homeController {
   async hospitallist(ctx, next) {
@@ -42,6 +45,7 @@ class homeController {
       ctx.app.emit("error", hospitalLevelAndRegionError, ctx);
     }
   }
+  // 异步搜索医院信息
   async hospitalSearch(ctx, next) {
     const { keyword } = ctx.params;
     try {
@@ -54,6 +58,37 @@ class homeController {
     } catch (error) {
       console.log(error);
       ctx.app.emit("error", hospitalSearchError, ctx);
+    }
+  }
+  // 异步函数，用于查询医院详情
+  async hospitalDetail(ctx, next) {
+    // 获取医院编码
+    const { hoscode } = ctx.params;
+    try {
+      // 调用findHospitalDetail函数，查询医院详情
+      const result = await findHospitalDetail(hoscode);
+      // 返回查询结果
+      ctx.body = {
+        code: 200,
+        message: "查询医院详情成功",
+        result,
+      };
+    } catch (error) {
+      // 捕获错误，并触发错误处理函数
+      ctx.app.emit("error", hospitalDetailError, ctx);
+    }
+  }
+  async hospitalDepartment(ctx, next) {
+    const { hoscode } = ctx.params;
+    try {
+      const result = await findHospitalDepartment(hoscode);
+      ctx.body = {
+        code: 200,
+        message: "查询医院科室成功",
+        result,
+      };
+    } catch (error) {
+      ctx.app.emit("error", hospitalDepartmentError, ctx);
     }
   }
 }
